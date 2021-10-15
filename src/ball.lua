@@ -25,19 +25,21 @@ function ball:update(dt)
   --Check collision
   ball:collision(player)
   ball:collision(cpu)
-  --Edge detection
+  --Horizontal Edge detection
   if self.y < self.r or self.y > h-self.r then
     self.ang = -(self.ang-math.pi/2)-math.pi/2
   end
   
-  if self.x < self.r or self.x>w-self.x then
+  --Vertical Edge detection
+  if self.x < self.r or self.x > w-self.x then
     self.x=w/2
     self.y=h/2
     self.vel=initSpeed
+    --Aumenta el valor de score dependiendo de que lado colisione
     if self.x < self.r then
-      cpupts=cpupts+1
+      cpupts = cpupts + 1
     else
-      playerpts=playerpts+1
+      playerpts = playerpts + 1
     end
   end
 end
