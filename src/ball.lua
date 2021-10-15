@@ -1,4 +1,4 @@
-local obj = obj or require"lib/object.lua"
+local obj = obj or require"C:\Users\bigth\Documents\Universitat\2on\T1\Programacio\Practiques\Prac1\LovePong\Practica 1 POO\lib\object.lua"
 local ball = obj.extend()
 
 function ball:new(x,y,radi,velocitat,angle)
