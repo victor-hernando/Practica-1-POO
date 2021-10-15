@@ -1,6 +1,6 @@
-local obj = obj or require"C:\Users\bigth\Documents\Universitat\2on\T1\Programacio\Practiques\Prac1\LovePong\Practica 1 POO\lib\object.lua"
+local Obj = Obj or require ("lib/object")
 
-local ball = obj.extend()
+local ball = obj:extend()
 local deltaX, deltaY
 local initSpeed
 local playerPts, cpuPts
@@ -14,7 +14,7 @@ function ball:new(x,y,radi,velocitat,angle,player,cpu,score)
   self.ang=angle
   self.player=player
   self.cpu=cpu
-  self.scr
+  --self.scr
   return self
 end
 
@@ -58,3 +58,4 @@ function ball:collision(obj)
   end
   
 return ball
+end

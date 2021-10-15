@@ -2,13 +2,13 @@ local obj = obj or require("lib/object")
 local paddle = obj.extend()
 
 function paddle:new(x,y,width,height,velocitat, player)
-  self.x=x
-  self.y=y
-  self.w=width
-  self.h=height
-  self.vel=velocitat
-  self.offset=offset
-  self.player=player
+  self.x=x or 30
+  self.y=y or w/2+50
+  self.w=width or 30
+  self.h=height or 100
+  self.vel=velocitat or 40
+  self.offset=offset or 30
+  self.player=player or false
   return self
 end
 

@@ -1,7 +1,6 @@
-local ball = ball or require"C:/Users/bigth/Documents/Universitat/2on/T1/Programacio/Practiques/Prac1/LovePong/Practica 1 POO/src/ball.lua"
-local paddle = paddle or require("")
-local score = socre or require("")
-local pilota
+local ball = ball or require"src/ball"
+local paddle = paddle or require"src/paddle"
+local score = score or require"src/score"
 local player, cpu
 local playerScore, cpuScore
 
