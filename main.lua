@@ -6,6 +6,7 @@ function love.load(arg)
   if arg[#arg] == "-debug" then
     require("moddebug").start()
   end
+  w, h = love.graphics.getDimensions() -- Get the screen width and height
   
   b=ball(0,0,10,300,0)
   player=paddle()
