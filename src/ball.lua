@@ -2,16 +2,19 @@ local obj = obj or require"C:\Users\bigth\Documents\Universitat\2on\T1\Programac
 
 local ball = obj.extend()
 local deltaX, deltaY
+local initSpeed
+local playerPts, cpuPts
 
-
-function ball:new(x,y,radi,velocitat,angle,player,cpu)
+function ball:new(x,y,radi,velocitat,angle,player,cpu,score)
   self.x=x
   self.y=y
   self.r=radi
+  initSpeed=velocitat
   self.vel=velocitat
   self.ang=angle
   self.player=player
   self.cpu=cpu
+  self.scr
   return self
 end
 
@@ -22,7 +25,21 @@ function ball:update(dt)
   --Check collision
   ball:collision(player)
   ball:collision(cpu)
+  --Edge detection
+  if self.y < self.r or self.y > h-self.r then
+    self.ang = -(self.ang-math.pi/2)-math.pi/2
+  end
   
+  if self.x < self.r or self.x>w-self.x then
+    self.x=w/2
+    self.y=h/2
+    self.vel=initSpeed
+    if self.x < self.r then
+      cpupts=cpupts+1
+    else
+      playerpts=playerpts+1
+    end
+  end
 end
 
 function ball:draw()
