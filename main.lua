@@ -26,6 +26,7 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.line(w/2,0,w/2,h)
   pilota:draw()
   player:draw()
   cpu:draw()
