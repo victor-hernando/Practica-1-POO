@@ -5,11 +5,11 @@ function score:new(points,x,y)
   self.points=points
   self.x=x
   self.y=y
+  love.graphics.setFont(love.graphics.newFont("pong.ttf",fontScale), fontScale )
   return self
 end
 
 function score:update(dt)
-
 end
 
 function score:draw()

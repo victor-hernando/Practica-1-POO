@@ -6,14 +6,14 @@ local initSpeed
 local playerPts, cpuPts
 
 function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts)
-  self.x=x or w/2
-  self.y=y or h/2
-  self.r=radi or 10
-  initSpeed=velocitat or 50
-  self.vel=velocitat or 50
-  self.ang=angle or 0
-  self.player=player or 0
-  self.cpu=cpu or 0
+  self.x=x
+  self.y=y
+  self.r=radi
+  initSpeed=velocitat
+  self.vel=velocitat
+  self.ang=angle
+  self.player=player
+  self.cpu=cpu
   --self.playerpts=playerPts
   --self.cpupts=cpuPts
   playerPts=playerpts
@@ -51,8 +51,8 @@ function ball:draw()
 end
 
 function ball.collision(pilota,val)
-  deltaX = pilota.x - math.max(val.x, math.min(pilota.x, val.x + 10))
-  deltaY = pilota.y - math.max(val.y, math.min(pilota.y, val.y + 100))
+  deltaX = pilota.x - math.max(val.x, math.min(pilota.x, val.x + paddleWidth))
+  deltaY = pilota.y - math.max(val.y, math.min(pilota.y, val.y + paddleHeight))
   --Si la pelota interseca con el objeto pasado como parametro, rebota especularmente y aumenta su velocidad
   if deltaX * deltaX + deltaY * deltaY < pilota.r * pilota.r then
     pilota.vel=pilota.vel*1.1

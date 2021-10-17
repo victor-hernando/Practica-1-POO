@@ -3,13 +3,13 @@ local paddle = obj:extend()
 local target
 
 function paddle:new(x,y,width,height,velocitat, player)
-  self.x=x or 30
-  self.y=y or w/2+50
-  self.w=width or 30
-  self.h=height or 100
-  self.vel=velocitat or 40
+  self.x=x
+  self.y=y
+  self.w=width
+  self.h=height
+  self.vel=velocitat
   self.offset=self.h/2
-  self.player=player or false
+  self.player=player
   return self
 end
 
@@ -30,7 +30,7 @@ function paddle:update(dt)
 end
 
 function paddle:draw()
-  love.graphics.rectangle("fill", self.x, self.y, self.w, self.h, 3, 3, 1)
+  love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
 end
 function paddle.setTarget(ball)
   target = ball
