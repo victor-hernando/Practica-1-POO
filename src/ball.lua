@@ -1,6 +1,6 @@
 local Obj = Obj or require ("lib/object")
 
-local ball = obj:extend()
+local ball = Obj:extend()
 local deltaX, deltaY
 local initSpeed
 local playerPts, cpuPts
@@ -9,11 +9,11 @@ function ball:new(x,y,radi,velocitat,angle,player,cpu,score)
   self.x=x
   self.y=y
   self.r=radi
-  initSpeed=velocitat
-  self.vel=velocitat
-  self.ang=angle
-  self.player=player
-  self.cpu=cpu
+  initSpeed=velocitat or 50
+  self.vel=velocitat or 50
+  self.ang=angle or 0
+  self.player=player or 0
+  self.cpu=cpu or 0
   --self.scr
   return self
 end
@@ -56,6 +56,5 @@ function ball:collision(obj)
     self.vel=self.vel*1.1
     self.ang = -( self.ang - math.pi/2 ) + math.pi/2
   end
-  
-return ball
 end
+return ball

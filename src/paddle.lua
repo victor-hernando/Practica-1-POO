@@ -1,5 +1,5 @@
 local obj = obj or require("lib/object")
-local paddle = obj.extend()
+local paddle = obj:extend()
 
 function paddle:new(x,y,width,height,velocitat, player)
   self.x=x or 30
@@ -13,11 +13,13 @@ function paddle:new(x,y,width,height,velocitat, player)
 end
 
 function paddle:update(dt)
-  if player == false do
+  if player == false then
     if target.y<self.y then
       self.y = self.y - self.vel*dt
     elseif target.y>self.y then
       self.y = self.y + self.vel*dt
+    end
+  end
 end
 
 function paddle:draw()
@@ -25,14 +27,17 @@ function paddle:draw()
 end
 
 function paddle:keypressed(dt)
-  if player do
+  if player then
     if love.keyboard.isDown("down") then
     self.Y=self.Y+self.vel*dt
     elseif love.keyboard.isDown("up") then
     self.Y=self.Y-self.vel*dt
+    end
   end
 end
+
 
 function paddle:setTarget(ball)
   local target = ball
 end
+return paddle
