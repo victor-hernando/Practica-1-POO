@@ -13,6 +13,9 @@ function love.load(arg)
   if arg[#arg] == "-debug" then
     require("mobdebug").start()
   end
+  ballSprite = love.graphics.newImage("Sprites/pilota.png")
+  paddleSprite = love.graphics.newImage("Sprites/paddle.png")
+  background = love.graphics.newImage("Sprites/background.png")
   --manageThings(start,true)
   --start=button(200,h/2,50,20,"Start")
   --exit=button(600,h/2,50,20,"Exit")
