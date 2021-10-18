@@ -26,8 +26,8 @@ function ball:update(dt)
   self.x = self.x + self.vel*math.cos(self.ang)*dt
   self.y = self.y + self.vel*math.sin(self.ang)*dt
  --Check collision
-  ball.collision(self,self.player)
-  ball.collision(self,self.cpu)
+  self:collision(self.player)
+  self:collision(self.cpu)
   --Horizontal Edge detection
   if self.y < self.r or self.y > h-self.r then
     self.ang = -(self.ang-math.pi/2)-math.pi/2
@@ -51,13 +51,13 @@ function ball:draw()
   --love.graphics.draw(sprite, self.x, self.y, self.r)
 end
 
-function ball.collision(pilota,val)
-  deltaX = pilota.x - math.max(val.x, math.min(pilota.x, val.x + paddleWidth))
-  deltaY = pilota.y - math.max(val.y, math.min(pilota.y, val.y + paddleHeight))
+function ball:collision(val)
+  deltaX = self.x - math.max(val.x, math.min(self.x, val.x + paddleWidth))
+  deltaY = self.y - math.max(val.y, math.min(self.y, val.y + paddleHeight))
   --Si la pelota interseca con el objeto pasado como parametro, rebota especularmente y aumenta su velocidad
-  if deltaX * deltaX + deltaY * deltaY < pilota.r * pilota.r then
-    pilota.vel=pilota.vel*1.1
-    pilota.ang = -( pilota.ang - math.pi/2 ) + math.pi/2
+  if deltaX * deltaX + deltaY * deltaY < self.r * self.r then
+    self.vel=self.vel*1.1
+    self.ang = -( self.ang - math.pi/2 ) + math.pi/2
   end
 end
 return ball
