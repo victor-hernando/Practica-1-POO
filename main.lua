@@ -26,7 +26,7 @@ function love.load(arg)
   cpu = paddle(w-(margeX+paddleWidth),margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel*0.75,false)
   playerScore = score(initScore,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
-  pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore)
+  pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   cpu.setTarget(pilota)
 end
 

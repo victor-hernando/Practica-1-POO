@@ -5,7 +5,7 @@ local deltaX, deltaY
 local initSpeed
 local playerPts, cpuPts
 
-function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts)
+function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
   self.x=x
   self.y=y
   self.r=radi
@@ -48,6 +48,7 @@ end
 
 function ball:draw()
   love.graphics.circle("fill", self.x, self.y, self.r)
+  --love.graphics.draw(sprite, self.x, self.y, self.r)
 end
 
 function ball.collision(pilota,val)
