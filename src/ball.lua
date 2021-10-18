@@ -18,6 +18,7 @@ function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
   --self.cpupts=cpuPts
   playerPts=playerpts
   cpuPts=cpupts
+  self.sprite=sprite
   return self
 end
 
@@ -48,7 +49,7 @@ end
 
 function ball:draw()
   love.graphics.circle("fill", self.x, self.y, self.r)
-  --love.graphics.draw(sprite, self.x, self.y, self.r)
+  --love.graphics.draw(self.sprite, self.x, self.y, 0, 0.5, 0.5)
 end
 
 function ball:collision(val)
@@ -58,6 +59,11 @@ function ball:collision(val)
   if deltaX * deltaX + deltaY * deltaY < self.r * self.r then
     self.vel=self.vel*1.1
     self.ang = -( self.ang - math.pi/2 ) + math.pi/2
+    if val.x > w/2 then
+      self.x = val.x - self.r
+    else
+      self.x = val.x + self.r + paddleWidth
+    end
   end
 end
 return ball
