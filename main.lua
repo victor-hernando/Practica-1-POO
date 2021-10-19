@@ -10,7 +10,6 @@ local pilota
 local start, exit
 local thingsToPrint, thingsStart, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite, background
-local playerName
 -- Hi-Score variables
 local scoreTable = hiScr
 local lowestVal = 1000
@@ -43,8 +42,7 @@ end
 
 function love.mousepressed()
   if start:checkMouse() then
-    playerName = "vic"
-    playerScore.name = playerName
+    playerScore.name=io.read()
     thingsToPrint=thingsPlay
   end
   if  exit:checkMouse() then
@@ -53,9 +51,9 @@ function love.mousepressed()
 end
 
 function love.keypressed()
-  if love.keyboard.isDown("q") then
-    if thingsToPrint == thingsPlay then
-      updateScores(playerName,playerScore.points)
+  if thingsToPrint == thingsPlay then
+    if love.keyboard.isDown("q") then
+      updateScores(playerScore.name,playerScore.points)
       thingsToPrint = thingsHiScore
     end
   end
