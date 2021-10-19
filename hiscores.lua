@@ -1,0 +1,1 @@
+return {void1=0,void2=0,void3=0}
