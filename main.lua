@@ -3,6 +3,7 @@ local ball = ball or require"src/ball"
 local paddle = paddle or require"src/paddle"
 local score = score or require"src/score"
 local button = buton or require  "src/button"
+local hiscr = io.open("hiscores","r")
 local player, cpu
 local playerScore, cpuScore
 local pilota
@@ -21,8 +22,6 @@ function love.load(arg)
   start=button(150,h/2,130,40,"Start")
   exit=button(550,h/2,90,40,"Exit")
   thingsStart={start,exit}
-  --addThings(start)
-  --addThings(exit)
   player = paddle(margeX,margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel,true)
   cpu = paddle(w-(margeX+paddleWidth),margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel*0.75,false)
   playerScore = score(initScore,playerScoreX,scoreY)
@@ -31,6 +30,16 @@ function love.load(arg)
   cpu.setTarget(pilota)
   thingsPlay = {player,cpu,playerScore,cpuScore,pilota}
   thingsToPrint = thingsStart
+  
+  
+  io.input(hiscr)
+  --print(io.read())
+  a=io.read()
+  print(a[1])
+  --local hiscr = io.open("hiscores","w")
+  --io.output(hiscr)
+  --io.write("hola")
+  
 end
 
 function love.mousepressed()
@@ -42,29 +51,11 @@ function love.mousepressed()
   end
 end
 
---[[
-function love.update(dt)
-  pilota:update(dt)
-  player:update(dt)
-  cpu:update(dt)
-end
---]]
 function love.update(dt)
   for i,v in ipairs(thingsToPrint) do
     v:update(dt)
   end
 end
-
---[[
-function love.draw()
-  love.graphics.line(w/2,0,w/2,h)
-  pilota:draw()
-  player:draw()
-  cpu:draw()
-  playerScore:draw()
-  cpuScore:draw()
-end
---]]
 
 function love.draw()
   for i,v in ipairs(thingsToPrint) do
