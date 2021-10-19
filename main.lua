@@ -105,7 +105,7 @@ function updateScores(name,value)
     end
   end
   for i, v in ipairs (names) do
-    table.insert(thingsHiScore,button(550,h/2+50*i,220,40,v..": "..values[i]))
+    table.insert(thingsHiScore,button(w/2-110,100+50*i,220,40,v..": "..values[i]))
   end
 end
 
