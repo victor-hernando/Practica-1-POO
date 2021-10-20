@@ -5,10 +5,11 @@ local deltaX, deltaY
 local initSpeed
 local playerPts, cpuPts
 
-function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
+function ball:new(x,y,width,height,velocitat,angle,player,cpu,playerpts,cpupts,sprite)
   self.x=x
   self.y=y
-  self.r=radi
+  self.w=width
+  self.h=height
   initSpeed=velocitat
   self.vel=velocitat
   self.ang=angle
@@ -18,7 +19,7 @@ function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
   --self.cpupts=cpuPts
   playerPts=playerpts
   cpuPts=cpupts
-  self.sprite=sprite
+  self.img=sprite
   return self
 end
 
@@ -30,11 +31,11 @@ function ball:update(dt)
   self:collision(self.player)
   self:collision(self.cpu)
   --Horizontal Edge detection
-  if self.y < self.r or self.y > h-self.r then
+  if self.y < 0 or self.y > h-self.h then
     self.ang = -(self.ang-math.pi/2)-math.pi/2
   end
   --Vertical Edge detection
-  if self.x <= 0 or self.x >= w then
+  if self.x <= 0 or self.x + self.w >= w then
     self.vel=initSpeed
     --Aumenta el valor de score dependiendo de que lado colisione
     if self.x <= 0 then
@@ -48,22 +49,37 @@ function ball:update(dt)
 end
 
 function ball:draw()
-  love.graphics.circle("fill", self.x, self.y, self.r)
+  love.graphics.draw(self.img, self.x, self.y)
   --love.graphics.draw(self.sprite, self.x, self.y, 0, 0.5, 0.5)
 end
 
 function ball:collision(val)
-  deltaX = self.x - math.max(val.x, math.min(self.x, val.x + paddleWidth))
-  deltaY = self.y - math.max(val.y, math.min(self.y, val.y + paddleHeight))
+
+  if (self.x < val.x + val.w and self.x + self.w > val.x and self.y < val.y + val.h and self.h + self.y > val.y) then
+    self.vel=self.vel*1.1
+    self.ang = -(self.ang - math.pi/2 ) + math.pi/2
+    if val.x > w/2 then
+      self.x = val.x - self.h
+    else
+      self.x = val.x + val.w
+    end
+  end  
+
+end
+--[[function ball:collision(val)
+  deltaX = self.x - math.max(val.x, math.min(self.x, val.x + val.w))
+  deltaY = self.y - math.max(val.y, math.min(self.y, val.y + val.h))
   --Si la pelota interseca con el objeto pasado como parametro, rebota especularmente y aumenta su velocidad
-  if deltaX * deltaX + deltaY * deltaY < self.r * self.r then
+  if deltaX * deltaX + deltaY * deltaY < self.h/2 * self.h/2 then
+    
     self.vel=self.vel*1.1
     self.ang = -( self.ang - math.pi/2 ) + math.pi/2
     if val.x > w/2 then
-      self.x = val.x - self.r
+      self.x = val.x - self.h/2
     else
-      self.x = val.x + self.r + paddleWidth
+      self.x = val.x + self.h/2 + val.w
     end
   end
-end
+end--]]
+
 return ball
