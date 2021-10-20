@@ -20,7 +20,6 @@ local names = {}
 local values = {}
 
 function love.load(arg)
-  -- Hola
   if arg[#arg] == "-debug" then
     require("mobdebug").start()
   end
