@@ -2,7 +2,7 @@ local obj = obj or require("lib/object")
 local paddle = obj:extend()
 local target
 
-function paddle:new(x,y,width,height,velocitat, player, sprite)
+function paddle:new(x,y,width,height,velocitat, player)
   self.x=x
   self.y=y
   self.w=width
@@ -10,7 +10,6 @@ function paddle:new(x,y,width,height,velocitat, player, sprite)
   self.vel=velocitat
   self.offset=self.h/2
   self.player=player
-  self.img = sprite
   return self
 end
 
@@ -31,7 +30,7 @@ function paddle:update(dt)
 end
 
 function paddle:draw()
-  love.graphics.draw(self.img, self.x, self.y)
+  love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
 end
 function paddle.setTarget(ball)
   target = ball

@@ -4,14 +4,17 @@ local paddle = paddle or require"src/paddle"
 local score = score or require"src/score"
 local button = buton or require  "src/button"
 local hiScr = hiScr or require "hiscores"
-local background = background or require"src/background"
 local player, cpu
 local playerScore, cpuScore
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 local pilota, fons
+=======
+local pilota
+>>>>>>> parent of 52d4cba (canvis)
 local start, exit
 local thingsToPrint, thingsStart, thingsPlay, thingsHiScore
-local ballSprite, paddleSprite
+local ballSprite, paddleSprite, background
 -- Hi-Score variables
 local scoreTable = hiScr
 local lowestVal = 1000
@@ -31,22 +34,17 @@ function love.load(arg)
 <<<<<<< Updated upstream
   thingsToPrint={}
   thingsHiScore={}
-  
-  ballSprite = love.graphics.newImage("sprites/ball.png")
-  playerSprite = love.graphics.newImage("sprites/paddle1.png")
-  cpuSprite = love.graphics.newImage("sprites/paddle2.png")
-  
+  ballSprite = love.graphics.newImage("Sprites/pilota.png")
+  --paddleSprite = love.graphics.newImage("Sprites/paddle.png")
+  --background = love.graphics.newImage("Sprites/background.png")
   start=button(150,h/2,130,40,"Start")
   exit=button(550,h/2,90,40,"Exit")
   thingsStart={start,exit}
-  
-  fons = background(love.graphics.newImage("sprites/background.png"), love.graphics.newImage("sprites/planets.png"))
-  
-  player = paddle(margeX,margeY-playerSprite:getHeight()/2,playerSprite:getWidth(),playerSprite:getHeight(),paddleVel,true, playerSprite)
-  cpu = paddle(w-(margeX+cpuSprite:getWidth()),margeY-cpuSprite:getHeight()/2,cpuSprite:getWidth(),cpuSprite:getHeight(),paddleVel*0.75,false, cpuSprite)
-  
+  player = paddle(margeX,margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel,true)
+  cpu = paddle(w-(margeX+paddleWidth),margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel*0.75,false)
   playerScore = score(initScore-1,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
+<<<<<<< HEAD
   
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   
@@ -58,8 +56,10 @@ function love.load(arg)
   cpuScore = score(initScore,cpuScoreX,scoreY)
   pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore,ballSprite)
 >>>>>>> Stashed changes
+=======
+  pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
+>>>>>>> parent of 52d4cba (canvis)
   cpu.setTarget(pilota)
-  
   thingsPlay = {player,cpu,playerScore,cpuScore,pilota}
   thingsToPrint = thingsStart
 end
@@ -90,7 +90,6 @@ function love.update(dt)
 end
 
 function love.draw()
-  fons:draw()
   for i,v in ipairs(thingsToPrint) do
     v:draw()
   end
