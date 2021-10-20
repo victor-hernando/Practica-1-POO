@@ -18,6 +18,9 @@ local lowestName
 local writing = "return {"
 local names = {}
 local values = {}
+local pilota
+local ballSprite, paddleSprite, background
+>>>>>>> Stashed changes
 
 function love.load(arg)
   if arg[#arg] == "-debug" then
@@ -44,6 +47,12 @@ function love.load(arg)
   
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   
+  player = paddle(margeX,margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel,true)
+  cpu = paddle(w-(margeX+paddleWidth),margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel*0.75,false)
+  playerScore = score(initScore,playerScoreX,scoreY)
+  cpuScore = score(initScore,cpuScoreX,scoreY)
+  pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore,ballSprite)
+>>>>>>> Stashed changes
   cpu.setTarget(pilota)
   
   thingsPlay = {player,cpu,playerScore,cpuScore,pilota}
