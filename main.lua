@@ -7,6 +7,7 @@ local hiScr = hiScr or require "hiscores"
 local background = background or require"src/background"
 local player, cpu
 local playerScore, cpuScore
+<<<<<<< Updated upstream
 local pilota, fons
 local start, exit
 local thingsToPrint, thingsStart, thingsPlay, thingsHiScore
@@ -18,6 +19,7 @@ local lowestName
 local writing = "return {"
 local names = {}
 local values = {}
+=======
 local pilota
 local ballSprite, paddleSprite, background
 >>>>>>> Stashed changes
@@ -26,6 +28,7 @@ function love.load(arg)
   if arg[#arg] == "-debug" then
     require("mobdebug").start()
   end
+<<<<<<< Updated upstream
   thingsToPrint={}
   thingsHiScore={}
   
@@ -47,6 +50,8 @@ function love.load(arg)
   
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   
+=======
+
   player = paddle(margeX,margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel,true)
   cpu = paddle(w-(margeX+paddleWidth),margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel*0.75,false)
   playerScore = score(initScore,playerScoreX,scoreY)
