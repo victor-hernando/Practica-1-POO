@@ -32,7 +32,7 @@ function love.load(arg)
   thingsStart={start,exit}
   player = paddle(margeX,margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel,true)
   cpu = paddle(w-(margeX+paddleWidth),margeY-paddleHeight/2,paddleWidth,paddleHeight,paddleVel*0.75,false)
-  playerScore = score(initScore,playerScoreX,scoreY)
+  playerScore = score(initScore-1,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
   pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   cpu.setTarget(pilota)
@@ -53,7 +53,7 @@ end
 function love.keypressed()
   if thingsToPrint == thingsPlay then
     if love.keyboard.isDown("q") then
-      updateScores(playerScore.name,playerScore.points)
+      updateScores(playerScore.name, playerScore.points)
       thingsToPrint = thingsHiScore
     end
   end

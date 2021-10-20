@@ -1,1 +1,1 @@
-return {void1=0,void2=0,void3=0}
+return {hola=6,Manu=2,tuty=9}
