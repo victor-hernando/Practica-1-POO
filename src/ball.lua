@@ -7,10 +7,14 @@ local playerPts, cpuPts
 local rotation
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function ball:new(x,y,width,height,velocitat,angle,player,cpu,playerpts,cpupts,sprite)
 
 function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts,sprite, rotationSpeed)
 
+=======
+function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
+>>>>>>> parent of 52d4cba (canvis)
 =======
 function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
 >>>>>>> parent of 52d4cba (canvis)
@@ -25,10 +29,14 @@ function ball:new(x,y,radi,velocitat,angle,player,cpu,playerpts,cpupts, sprite)
   playerPts=playerpts
   cpuPts=cpupts
 <<<<<<< HEAD
+<<<<<<< HEAD
   self.img=sprite
   self.sprite = sprite
   self.rotSpeed = rotationSpeed or 5
   rotation = 0
+=======
+  self.sprite=sprite
+>>>>>>> parent of 52d4cba (canvis)
 =======
   self.sprite=sprite
 >>>>>>> parent of 52d4cba (canvis)

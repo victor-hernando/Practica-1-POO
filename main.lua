@@ -7,8 +7,12 @@ local hiScr = hiScr or require "hiscores"
 local player, cpu
 local playerScore, cpuScore
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 local pilota, fons
+=======
+local pilota
+>>>>>>> parent of 52d4cba (canvis)
 =======
 local pilota
 >>>>>>> parent of 52d4cba (canvis)
@@ -45,6 +49,7 @@ function love.load(arg)
   playerScore = score(initScore-1,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   
@@ -56,6 +61,9 @@ function love.load(arg)
   cpuScore = score(initScore,cpuScoreX,scoreY)
   pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore,ballSprite)
 >>>>>>> Stashed changes
+=======
+  pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
+>>>>>>> parent of 52d4cba (canvis)
 =======
   pilota = ball(xBall,yBall,rBall,initBallVel,initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
 >>>>>>> parent of 52d4cba (canvis)
