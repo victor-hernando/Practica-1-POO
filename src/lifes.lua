@@ -9,13 +9,13 @@ function lifes:new(x,y,sprite,cpu)
   return self
 end
 
-function tab:update(dt)
+function lifes:update(dt)
 end
 
-function tab:draw()
-  for i = 1, 3 - #cpu.points then
-    love.graphics.draw(self.Sprite, self.x + 10 * i, self.y)
+function lifes:draw()
+  for i = 1, 3 - self.cpu.points do
+    love.graphics.draw(self.s, self.x + (2+self.s:getWidth()) * i, self.y)
   end
 end
 
-return tab
+return lifes

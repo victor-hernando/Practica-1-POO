@@ -6,9 +6,10 @@ local button = buton or require  "src/button"
 local names = names or require "names"
 local values = values or require "hiscores"
 local background = background or require"src/background"
+local lifes = lifes or require "src/lifes"
 local tab = tab or require"src/tab"
 local player, cpu
-local playerScore, cpuScore
+local playerScore, cpuScore, playerLife
 local pilota, fons
 local start, exit, finish, name, meeting
 local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
@@ -51,12 +52,12 @@ function love.load(arg)
   
   playerScore = score(initScore,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
-  
+  playerLife = lifes(50, 20, ballSprite, cpuScore)
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   
   cpu.setTarget(pilota)
   
-  thingsPlay = {player,cpu,playerScore,cpuScore,pilota}
+  thingsPlay = {player,cpu,playerScore,cpuScore,playerLife,pilota}
   thingsToPrint = thingsStart
 end
 
