@@ -3,7 +3,8 @@ local ball = ball or require"src/ball"
 local paddle = paddle or require"src/paddle"
 local score = score or require"src/score"
 local button = buton or require  "src/button"
-local hiScr = hiScr or require "hiscores"
+local names = names or require "names"
+local values = values or require "hiscores"
 local background = background or require"src/background"
 local player, cpu
 local playerScore, cpuScore
@@ -15,9 +16,8 @@ local ballSprite, paddleSprite
 local scoreTable = hiScr
 local lowestVal = 1000
 local lowestName
-local writing = "return {"
-local names = {}
-local values = {}
+local writing1 = "return {"
+local writing2 = "return {"
 
 function love.load(arg)
   if arg[#arg] == "-debug" then
@@ -83,38 +83,40 @@ function love.draw()
 end
 
 function updateScores(name,value)
-  for i, v in pairs (scoreTable) do
-    if v < lowestVal then
-      lowestVal = v
-      lowestName = i
-    end
+  for i, v in pairs (values) do
+    --print(names[i]..v)
+    if value >= v then
+      table.insert(values,i,value)
+      table.insert(names,i,name)
+      break
+    end    
   end
-  if value > lowestVal then
-    for i, v in pairs (scoreTable) do
-      if i ~= lowestName then
-        table.insert(names,i)
-        table.insert(values,v)
-      end
-    end
-    for i, v in ipairs (names) do
-      writing = writing..v.."="..values[i]..","
-    end
-    writing=writing..name.."="..value.."}"
-    print (response)
-    local hiscore = io.open("hiscores.lua","w")
-    io.output(hiscore)
-    io.write(writing)
-    io.close(hiscore)
-    table.insert(names,name)
-    table.insert(values,value)
-  else
-    for i, v in pairs (scoreTable) do
-      table.insert(names,i)
-      table.insert(values,v)
-    end
+  if #values > 3 then
+    table.remove(values)
+    table.remove(names)
   end
+  for i, v in pairs (values) do
+    print(names[i]..v)
+  end
+  for i, v in pairs (names) do
+      writing1 = writing1..'"'..v..'"'..","
+  end
+  writing1 = string.sub(writing1,1,#writing1 - 1).."}"
+  for i, v in pairs (values) do
+      writing2 = writing2..v..","
+  end
+  writing2 = string.sub(writing2,1,#writing2 - 1).."}"
+  print (writing1)
+  print (writing2)
+  local write = io.open("hiscores.lua","w")
+  io.output(write)
+  io.write(writing2)
+  io.close(write)
+  write = io.open("names.lua","w")
+  io.output(write)
+  io.write(writing1)
+  io.close(write)
   for i, v in ipairs (names) do
     table.insert(thingsHiScore,button(w/2-110,100+50*i,220,40,v..": "..values[i]))
   end
 end
-
