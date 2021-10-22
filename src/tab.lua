@@ -15,7 +15,7 @@ end
 
 function tab:draw()
   love.graphics.draw(self.spr,self.x,self.y,0, self.sc, self.sc)
-  love.graphics.print(self.text,self.x+20,self.y+27)
+  love.graphics.print(self.text,self.x,self.y+27)
 end
 
 return tab
