@@ -1,1 +1,1 @@
-return {hola=6,tuty=9,caca=3}
+return {5,5,3}
