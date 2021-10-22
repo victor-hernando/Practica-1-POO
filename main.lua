@@ -33,7 +33,7 @@ function love.load(arg)
   insertNameButton = love.graphics.newImage("sprites/InsertName.png")
   
   thingsToPrint = {}
-  finish = tab(w/2,100,quitButton)
+  finish = tab(w/2-110,100,quitButton)
   name = tab(w/2 - insertNameButton:getWidth()/2,200,insertNameButton)
   meeting = tab(w/2 - nameButton:getWidth()/2 ,80,nameButton)
   thingsHiScore = {finish}
@@ -72,6 +72,10 @@ function love.keypressed(key)
   if thingsToPrint == thingsCatchName and key == "return" then
     thingsToPrint = thingsPlay
     playerScore.name = name.text
+  end
+  if thingsToPrint == thingsPlay and key == "q" then
+    updateScores(playerScore.name, playerScore.points)
+    thingsToPrint = thingsHiScore
   end
 end
 
@@ -134,6 +138,6 @@ function updateScores(name,value)
   io.write(writing1)
   io.close(write)
   for i, v in ipairs (names) do
-    table.insert(thingsHiScore,button(w/2-110,100+50*i,220,40,v..": "..values[i]))
+    table.insert(thingsHiScore,tab(w/2-110,100+100*i,insertNameButton,v..": "..values[i]))
   end
 end
