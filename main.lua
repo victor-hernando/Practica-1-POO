@@ -59,6 +59,17 @@ function love.load(arg)
   thingsToPrint = thingsStart
 end
 
+function love.update(dt)
+  for i,v in ipairs(thingsToPrint) do
+    v:update(dt)
+  end
+  if cpuScore.points >= 3 then
+    updateScores(playerScore.name, playerScore.points)
+    thingsToPrint = thingsHiScore
+    cpuScore.points = 0
+  end
+end
+
 function love.mousepressed()
   if start:checkMouse() then
     thingsToPrint=thingsCatchName
@@ -88,12 +99,6 @@ function love.textinput(text)
       playerScore.name = name.text
     end
   end
-end
-
-function love.update(dt)
-    for i,v in ipairs(thingsToPrint) do
-      v:update(dt)
-    end
 end
 
 function love.draw()
