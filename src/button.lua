@@ -2,12 +2,14 @@ local obj = obj or require("lib/object")
 local button = obj:extend()
 local deltaX, deltaY
 
-function button:new(x,y,width,height,text)
+function button:new(x,y,width,height,text,sprite,spritePressed)
   self.x=x
   self.y=y
   self.width=width
   self.height=height
   self.text=text
+  self.spr = sprite
+  self.sprPrs = spritePressed
   return self
 end
 
@@ -15,8 +17,14 @@ function button:update(dt)
 end
 
 function button:draw()
-  love.graphics.rectangle("line",self.x,self.y,self.width,self.height)
-  love.graphics.print(self.text,self.x+10,self.y)
+  if love.mouse.getX() > self.x and love.mouse.getX() < self.x + self.w and love.mouse.getY() > self.y and love.mouse.getY() < self.y + self.h then
+    love.graphics.draw(spritePressed, self.x, self.y, self.width, self.height)
+  else
+    love.graphics.draw(sprite, self.x, self.y, self.width, self.height)
+  end
+  
+  --love.graphics.rectangle("line",self.x,self.y,self.width,self.height)
+  --love.graphics.print(self.text,self.x+10,self.y)
 end
 
 function button:checkMouse()
