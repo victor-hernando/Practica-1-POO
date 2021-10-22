@@ -1,1 +1,1 @@
-return {" Victor","void1","void2"}
+return {" Victor"," a"," a"}

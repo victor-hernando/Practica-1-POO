@@ -13,7 +13,7 @@ local pilota, fons
 local start, exit, finish, name, meeting
 local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite
-local startButton, startButtonPressed, quitButton, quitButtonPressed, nameButton, insertNameButton
+local startButton, startButtonPressed, quitButton, quitButtonPressed, nameButton, insertNameButton, gameOver
 local writing1 = "return {"
 local writing2 = "return {"
 
@@ -31,9 +31,10 @@ function love.load(arg)
   quitButtonPressed = love.graphics.newImage("sprites/QuitButtonPressed.png")
   nameButton = love.graphics.newImage("sprites/NameButton.png")
   insertNameButton = love.graphics.newImage("sprites/InsertName.png")
+  gameOver = love.graphics.newImage("sprites/GameOver.png")
   
   thingsToPrint = {}
-  finish = tab(w/2-110,100,quitButton)
+  finish = tab(w/2-gameOver:getWidth()/2.5,-50,gameOver, " ", 0.7)
   name = tab(w/2 - insertNameButton:getWidth()/2,200,insertNameButton)
   meeting = tab(w/2 - nameButton:getWidth()/2 ,80,nameButton)
   thingsHiScore = {finish}
