@@ -14,7 +14,7 @@ local pilota, fons
 local start, exit, finish, name, meeting
 local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite
-local startButton, startButtonPressed, quitButton, quitButtonPressed, nameButton, insertNameButton, gameOver
+local startButton, startButtonPressed, quitButton, quitButtonPressed, nameButton, insertNameButton, gameOver, heart
 local writing1 = "return {"
 local writing2 = "return {"
 
@@ -33,9 +33,10 @@ function love.load(arg)
   nameButton = love.graphics.newImage("sprites/NameButton.png")
   insertNameButton = love.graphics.newImage("sprites/InsertName.png")
   gameOver = love.graphics.newImage("sprites/GameOver.png")
+  heart = love.graphics.newImage("sprites/Heart.png")
   
   thingsToPrint = {}
-  finish = tab(w/2-gameOver:getWidth()/2.5,-50,gameOver, " ", 0.7)
+  finish = tab(w/2-gameOver:getWidth()/2.8,-62,gameOver, " ", 0.7)
   name = tab(w/2 - insertNameButton:getWidth()/2,200,insertNameButton)
   meeting = tab(w/2 - nameButton:getWidth()/2 ,80,nameButton)
   thingsHiScore = {finish}
@@ -52,7 +53,7 @@ function love.load(arg)
   
   playerScore = score(initScore,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
-  playerLife = lifes(50, 20, ballSprite, cpuScore)
+  playerLife = lifes(60, 30, heart, cpuScore, 0.065, 0.065)
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
   
   cpu.setTarget(pilota)
@@ -145,6 +146,6 @@ function updateScores(name,value)
   io.write(writing1)
   io.close(write)
   for i, v in ipairs (names) do
-    table.insert(thingsHiScore,tab(w/2-110,100+100*i,insertNameButton,v..": "..values[i]))
+    table.insert(thingsHiScore,tab(w/2-110,110+110*i,insertNameButton,v..": "..values[i]))
   end
 end
