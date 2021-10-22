@@ -9,13 +9,9 @@ local background = background or require"src/background"
 local player, cpu
 local playerScore, cpuScore
 local pilota, fons
-local start, exit
-local thingsToPrint, thingsStart, thingsPlay, thingsHiScore
+local start, exit, finish, name, meeting
+local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite
--- Hi-Score variables
-local scoreTable = hiScr
-local lowestVal = 1000
-local lowestName
 local writing1 = "return {"
 local writing2 = "return {"
 
@@ -23,8 +19,12 @@ function love.load(arg)
   if arg[#arg] == "-debug" then
     require("mobdebug").start()
   end
-  thingsToPrint={}
-  thingsHiScore={}
+  thingsToPrint = {}
+  finish = button(w/2,100,150,50,"")
+  name = button(w/2,150,150,50,"")
+  meeting = button(w/2,80,100,50,"Name:")
+  thingsHiScore = {finish}
+  thingsCatchName = {meeting,name}
   
   ballSprite = love.graphics.newImage("sprites/ball.png")
   playerSprite = love.graphics.newImage("sprites/paddle1.png")
@@ -39,7 +39,7 @@ function love.load(arg)
   player = paddle(margeX,margeY-playerSprite:getHeight()/2,playerSprite:getWidth(),playerSprite:getHeight(),paddleVel,true, playerSprite)
   cpu = paddle(w-(margeX+cpuSprite:getWidth()),margeY-cpuSprite:getHeight()/2,cpuSprite:getWidth(),cpuSprite:getHeight(),paddleVel*0.75,false, cpuSprite)
   
-  playerScore = score(initScore-1,playerScoreX,scoreY)
+  playerScore = score(initScore,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
   
   pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
@@ -52,26 +52,34 @@ end
 
 function love.mousepressed()
   if start:checkMouse() then
-    playerScore.name=io.read()
-    thingsToPrint=thingsPlay
+    thingsToPrint=thingsCatchName
   end
   if  exit:checkMouse() then
     os.exit()
   end
 end
 
-function love.keypressed()
-  if thingsToPrint == thingsPlay then
-    if love.keyboard.isDown("q") then
-      updateScores(playerScore.name, playerScore.points)
-      thingsToPrint = thingsHiScore
+function love.keypressed(key)
+  if thingsToPrint == thingsCatchName and key == "return" then
+    thingsToPrint = thingsPlay
+    playerScore.name = name.text
+  end
+end
+
+function love.textinput(text)
+    local a = text
+  if thingsToPrint == thingsCatchName then
+    name.text = name.text..a
+    if #name.text >= 6 then
+      thingsToPrint = thingsPlay
+      playerScore.name = name.text
     end
   end
 end
 
 function love.update(dt)
     for i,v in ipairs(thingsToPrint) do
-    v:update(dt)
+      v:update(dt)
     end
 end
 
