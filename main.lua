@@ -3,7 +3,6 @@ local ball = ball or require"src/ball"
 local paddle = paddle or require"src/paddle"
 local score = score or require"src/score"
 local button = buton or require  "src/button"
-local names = names or require "names"
 local values = values or require "hiscores"
 local background = background or require"src/background"
 local lifes = lifes or require "src/lifes"
@@ -15,8 +14,7 @@ local start, exit, finish, name, meeting
 local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite
 local startButton, startButtonPressed, quitButton, quitButtonPressed, nameButton, insertNameButton, gameOver, heart
-local writing1 = "return {"
-local writing2 = "return {"
+local writing = "return {"
 
 function love.load(arg)
   if arg[#arg] == "-debug" then
@@ -114,6 +112,30 @@ end
 function updateScores(name,value)
   for i, v in pairs (values) do
     --print(names[i]..v)
+    if value >= v[2] then
+      table.insert(values,i,{name,value})
+      break
+    end    
+  end
+  if #values > 3 then
+    table.remove(values)
+  end
+  
+  for i, v in pairs (values) do
+      writing = writing..'{"'..v[1]..'",'..v[2]..'},'
+  end
+  writing = string.sub(writing,1,#writing - 1).."}"
+  print (writing)
+  local write = io.open("hiscores.lua","w")
+  io.output(write)
+  io.write(writing)
+  io.close(write)
+  for i, v in ipairs (values) do
+    table.insert(thingsHiScore,tab(w/2-110,110+110*i,insertNameButton,v[1]..": "..v[2]))
+  end
+  --[[
+  for i, v in pairs (values) do
+    --print(names[i]..v)
     if value >= v then
       table.insert(values,i,value)
       table.insert(names,i,name)
@@ -148,4 +170,6 @@ function updateScores(name,value)
   for i, v in ipairs (names) do
     table.insert(thingsHiScore,tab(w/2-110,110+110*i,insertNameButton,v..": "..values[i]))
   end
+  --]]
+  
 end

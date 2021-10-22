@@ -1,1 +1,1 @@
-return {1,0,0}
+return {{" Daniel",2},{"Jhon",1},{" asdfgh",0}}
