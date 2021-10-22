@@ -13,8 +13,9 @@ function tab:update(dt)
 end
 
 function tab:draw()
-  for i = 1, 3 - #cpu.points
-  love.graphics.draw(self.actualSprite, self.x, self.y)
+  for i = 1, 3 - #cpu.points then
+    love.graphics.draw(self.Sprite, self.x + 10 * i, self.y)
+  end
 end
 
 return tab
