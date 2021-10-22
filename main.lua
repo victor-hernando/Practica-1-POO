@@ -12,6 +12,7 @@ local pilota, fons
 local start, exit, finish, name, meeting
 local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite
+local startButton, startButtonPressed, quitButton, quitButtonPressed
 local writing1 = "return {"
 local writing2 = "return {"
 
@@ -20,18 +21,22 @@ function love.load(arg)
     require("mobdebug").start()
   end
   thingsToPrint = {}
-  finish = button(w/2,100,150,50,"")
-  name = button(w/2,150,150,50,"")
-  meeting = button(w/2,80,100,50,"Name:")
-  thingsHiScore = {finish}
-  thingsCatchName = {meeting,name}
+  --finish = button(w/2,100,150,50,"")
+  --name = button(w/2,150,150,50,"")
+  --meeting = button(w/2,80,100,50,"Name:")
+  --thingsHiScore = {finish}
+  --thingsCatchName = {meeting,name}
   
   ballSprite = love.graphics.newImage("sprites/ball.png")
   playerSprite = love.graphics.newImage("sprites/paddle1.png")
   cpuSprite = love.graphics.newImage("sprites/paddle2.png")
+  startButton = love.graphics.newImage("sprites/PlayButton.png")
+  startButtonPressed = love.graphics.newImage("sprites/PlayButtonPressed.png")
+  quitButton = love.graphics.newImage("sprites/QuitButton.png")
+  quitButtonPressed = love.graphics.newImage("sprites/QuitButtonPressed.png")
   
-  start=button(150,h/2,130,40,"Start")
-  exit=button(550,h/2,90,40,"Exit")
+  start=button(100,h/2.35, startButton, startButtonPressed)
+  exit=button(490,h/2.35, quitButton, quitButtonPressed)
   thingsStart={start,exit}
   
   fons = background(love.graphics.newImage("sprites/background.png"), love.graphics.newImage("sprites/planets.png"))
