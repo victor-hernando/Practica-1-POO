@@ -18,7 +18,7 @@ paddleVel = 150
 --valors score
 initScore = 0
 scoreY = 100
-playerScoreX = 200
-cpuScoreX = 600
+playerScoreX = 130
+cpuScoreX = 525
 fontScale = 40
 

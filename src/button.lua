@@ -1,16 +1,14 @@
-local obj = obj or require("lib/object")
-local button = obj:extend()
+local tab = tab or require("src/tab")
+local button = tab:extend()
 local deltaX, deltaY
 
-function button:new(x,y,sprite,spritePressed, text)
-  self.x=x
-  self.y=y
+function button:new(x,y,sprite,spritePressed)
+  self.super.new(self,x,y)
   self.spr = sprite
   self.sprPrs = spritePressed
-  self.w = sprite:getWidth()
-  self.h = sprite:getHeight()
-  self.text = text or " "
   self.actualSprite = self.spr
+  self.w = self.actualSprite:getWidth()
+  self.h = self.actualSprite:getHeight()
   return self
 end
 
