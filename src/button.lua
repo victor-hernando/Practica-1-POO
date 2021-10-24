@@ -22,9 +22,6 @@ end
 
 function button:draw()
    love.graphics.draw(self.actualSprite, self.x, self.y)
-  
-  --love.graphics.rectangle("line",self.x,self.y,self.width,self.height)
-  --love.graphics.print(self.text,self.x+10,self.y)
 end
 
 function button:checkMouse()

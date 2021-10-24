@@ -46,6 +46,7 @@ function love.load(arg)
   
   cpu.setTarget(pilota)
   
+  soundtrack:setLooping(true)
   soundtrack:play()
   
   thingsPlay = {player, cpu, playerScore, cpuScore, playerLife, pilota}
@@ -104,7 +105,6 @@ end
 
 function updateScores(name,value)
   for i, v in pairs (values) do
-    --print(names[i]..v)
     if value >= v[2] then
       table.insert(values,i,{name,value})
       break
@@ -126,43 +126,5 @@ function updateScores(name,value)
   for i, v in ipairs (values) do
     table.insert(thingsHiScore,tab(w/2-110,110+110*i,insertNameButton,v[1]..": "..v[2]))
   end
-  --[[
-  for i, v in pairs (values) do
-    --print(names[i]..v)
-    if value >= v then
-      table.insert(values,i,value)
-      table.insert(names,i,name)
-      break
-    end    
-  end
-  if #values > 3 then
-    table.remove(values)
-    table.remove(names)
-  end
-  for i, v in pairs (values) do
-    print(names[i]..v)
-  end
-  for i, v in pairs (names) do
-      writing1 = writing1..'"'..v..'"'..","
-  end
-  writing1 = string.sub(writing1,1,#writing1 - 1).."}"
-  for i, v in pairs (values) do
-      writing2 = writing2..v..","
-  end
-  writing2 = string.sub(writing2,1,#writing2 - 1).."}"
-  print (writing1)
-  print (writing2)
-  local write = io.open("hiscores.lua","w")
-  io.output(write)
-  io.write(writing2)
-  io.close(write)
-  write = io.open("names.lua","w")
-  io.output(write)
-  io.write(writing1)
-  io.close(write)
-  for i, v in ipairs (names) do
-    table.insert(thingsHiScore,tab(w/2-110,110+110*i,insertNameButton,v..": "..values[i]))
-  end
-  --]]
   
 end

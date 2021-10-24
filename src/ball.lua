@@ -69,20 +69,5 @@ function ball:collision(val)
   end  
 
 end
---[[function ball:collision(val)
-  deltaX = self.x - math.max(val.x, math.min(self.x, val.x + val.w))
-  deltaY = self.y - math.max(val.y, math.min(self.y, val.y + val.h))
-  --Si la pelota interseca con el objeto pasado como parametro, rebota especularmente y aumenta su velocidad
-  if deltaX * deltaX + deltaY * deltaY < self.h/2 * self.h/2 then
-    
-    self.vel=self.vel*1.1
-    self.ang = -( self.ang - math.pi/2 ) + math.pi/2
-    if val.x > w/2 then
-      self.x = val.x - self.h/2
-    else
-      self.x = val.x + self.h/2 + val.w
-    end
-  end
-end--]]
 
 return ball
