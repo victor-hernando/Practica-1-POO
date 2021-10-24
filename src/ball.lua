@@ -15,14 +15,12 @@ function ball:new(x,y,width,height,velocitat,angle,player,cpu,playerpts,cpupts,s
   self.ang=angle
   self.player=player
   self.cpu=cpu
-  --self.playerpts=playerPts
-  --self.cpupts=cpuPts
   playerPts=playerpts
   cpuPts=cpupts
   self.img=sprite
-  self.colisionSound = love.audio.newSource("sounds/BallCollision.mp3", "static")
-  self.scoreSound = love.audio.newSource("sounds/MakePoint.mp3", "static")
-  self.loseSound = love.audio.newSource("sounds/LosePoint.mp3", "static")
+  self.colisionSound = colisionSound
+  self.scoreSound = scoreSound
+  self.loseSound = loseSound
   return self
 end
 
@@ -55,7 +53,6 @@ end
 
 function ball:draw()
   love.graphics.draw(self.img, self.x, self.y)
-  --love.graphics.draw(self.sprite, self.x, self.y, 0, 0.5, 0.5)
 end
 
 function ball:collision(val)
