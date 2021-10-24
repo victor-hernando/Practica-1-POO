@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 local obj = obj or require("lib/object")
 local tab = obj:extend()
 

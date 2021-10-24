@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 local Obj = Obj or require ("lib/object")
 local ball = Obj:extend()
 local deltaX, deltaY, yMaxBounceDiff
@@ -60,11 +62,12 @@ function ball:collision(val)
     yMaxBounceDiff = self.y-(val.y-self.h/2) --Calculamos la Y minima de la colision respecto el paddle
     self.colisionSound:play()
     self.vel=self.vel*1.1
-    self.ang = -(self.ang - math.pi/2 ) + math.pi/2 + (-ballBounceMaxDiff/2 + ballBounceMaxDiff * yMaxBounceDiff/(val.h+self.h/2))
     if val.x > w/2 then
       self.x = val.x - self.h
+      self.ang = -(self.ang - math.pi/2 ) + math.pi/2 + (ballBounceMaxDiff/2 - ballBounceMaxDiff * yMaxBounceDiff/(val.h+self.h/2))
     else
       self.x = val.x + val.w
+      self.ang = -(self.ang - math.pi/2 ) + math.pi/2 + (- ballBounceMaxDiff/2 + ballBounceMaxDiff * yMaxBounceDiff/(val.h+self.h/2))
     end
   end  
 

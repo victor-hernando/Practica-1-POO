@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 -- classic
 -- Copyright (c) 2014, rxi
 --

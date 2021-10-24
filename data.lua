@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 --Valors pantalla
 w, h = love.graphics.getDimensions() -- Get the screen width and height
 

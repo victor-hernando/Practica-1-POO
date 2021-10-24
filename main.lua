@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 local data = data or require"data"
 local ball = ball or require"src/ball"
 local paddle = paddle or require"src/paddle"

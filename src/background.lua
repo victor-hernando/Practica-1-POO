@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 local Obj = Obj or require ("lib/object")
 local background = Obj:extend()
 

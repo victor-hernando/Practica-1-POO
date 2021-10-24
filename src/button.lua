@@ -1,3 +1,5 @@
+--Marc Lloret & Victor Hernando
+
 local tab = tab or require("src/tab")
 local button = tab:extend()
 local deltaX, deltaY
