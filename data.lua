@@ -7,7 +7,7 @@ soundtrack = love.audio.newSource("sounds/Soundtrack.mp3", "stream")
 colisionSound = love.audio.newSource("sounds/BallCollision.mp3", "static")
 scoreSound = love.audio.newSource("sounds/MakePoint.mp3", "static")
 loseSound = love.audio.newSource("sounds/LosePoint.mp3", "static")
-soundtrackVolume = 0.6
+soundtrackVolume = 0.3
 scoreSoundVolume = 0.7
 
 --Sprites
@@ -44,9 +44,10 @@ xBall = w/2
 yBall = h/2
 rBall = 10
 initBallVel = 200
-initBallAng = 0.3
+initBallAng = {0,math.pi * 2}
 ballWidth = ballSprite:getWidth()
 ballHeight = ballSprite:getHeight()
+ballBounceMaxDiff = 1
 
 --Valors paddle
 playerMargeX = 30 

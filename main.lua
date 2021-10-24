@@ -14,11 +14,20 @@ local start, exit, finish, name, meeting
 local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local writing = "return {"
 
+--[[
+Principales cambios:
+  -Implementación de Sprites y sonido
+  -Pantalla Start / Exit
+  -Sistema de vidas y GameOver cuando pierdes todas las vidas o pulsas 'q'
+  -Introdución de nombre y tabla de puntuaciones hi-Score 
+  -Añadir pequeña desviación al rebote especular dependiendo de el lugar de colision respecto al paddle
+--]]
+
 function love.load(arg)
   if arg[#arg] == "-debug" then
     require("mobdebug").start()
   end
-  
+  math.randomseed(os.time())
   soundtrack:setVolume(soundtrackVolume)
   scoreSound:setVolume(scoreSoundVolume)
   
@@ -42,7 +51,7 @@ function love.load(arg)
   cpuScore = score(initScore, cpuScoreX, scoreY)
   
   playerLife = lifes(xLife, yLife, heart, cpuScore, lifeScale)
-  pilota = ball(xBall, yBall, ballWidth, ballHeight, initBallVel, initBallAng, player, cpu, playerScore, cpuScore, ballSprite, colisionSound, scoreSound, loseSound)
+  pilota = ball(xBall, yBall, ballWidth, ballHeight, initBallVel, math.random(initBallAng[1],initBallAng[2]), player, cpu, playerScore, cpuScore, ballSprite, colisionSound, scoreSound, loseSound)
   
   cpu.setTarget(pilota)
   

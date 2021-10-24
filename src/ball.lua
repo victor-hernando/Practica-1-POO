@@ -1,7 +1,6 @@
 local Obj = Obj or require ("lib/object")
-
 local ball = Obj:extend()
-local deltaX, deltaY
+local deltaX, deltaY, yMaxBounceDiff
 local initSpeed
 local playerPts, cpuPts
 
@@ -38,6 +37,7 @@ function ball:update(dt)
   --Vertical Edge detection
   if self.x <= 0 or self.x + self.w >= w then
     self.vel=initSpeed
+    self.ang = math.random(initBallAng[1],initBallAng[2])
     --Aumenta el valor de score dependiendo de que lado colisione
     if self.x <= 0 then
       cpuPts.points = cpuPts.points + 1
@@ -56,11 +56,11 @@ function ball:draw()
 end
 
 function ball:collision(val)
-
   if (self.x < val.x + val.w and self.x + self.w > val.x and self.y < val.y + val.h and self.h + self.y > val.y) then
+    yMaxBounceDiff = self.y-(val.y-self.h/2) --Calculamos la Y minima de la colision respecto el paddle
     self.colisionSound:play()
     self.vel=self.vel*1.1
-    self.ang = -(self.ang - math.pi/2 ) + math.pi/2
+    self.ang = -(self.ang - math.pi/2 ) + math.pi/2 + (-ballBounceMaxDiff/2 + ballBounceMaxDiff * yMaxBounceDiff/(val.h+self.h/2))
     if val.x > w/2 then
       self.x = val.x - self.h
     else

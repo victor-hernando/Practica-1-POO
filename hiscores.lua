@@ -1,1 +1,1 @@
-return {{" Daniel",2},{" Marc",1},{" Marc",1}}
+return {{" Pau",3},{" Manel",2},{" Daniel",2}}
