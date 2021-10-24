@@ -5,7 +5,7 @@ local deltaX, deltaY
 local initSpeed
 local playerPts, cpuPts
 
-function ball:new(x,y,width,height,velocitat,angle,player,cpu,playerpts,cpupts,sprite)
+function ball:new(x,y,width,height,velocitat,angle,player,cpu,playerpts,cpupts,sprite,colisionSound,scoreSound,loseSound)
   self.x=x
   self.y=y
   self.w=width
@@ -20,6 +20,9 @@ function ball:new(x,y,width,height,velocitat,angle,player,cpu,playerpts,cpupts,s
   playerPts=playerpts
   cpuPts=cpupts
   self.img=sprite
+  self.colisionSound = love.audio.newSource("sounds/BallCollision.mp3", "static")
+  self.scoreSound = love.audio.newSource("sounds/MakePoint.mp3", "static")
+  self.loseSound = love.audio.newSource("sounds/LosePoint.mp3", "static")
   return self
 end
 
@@ -40,8 +43,10 @@ function ball:update(dt)
     --Aumenta el valor de score dependiendo de que lado colisione
     if self.x <= 0 then
       cpuPts.points = cpuPts.points + 1
+      self.loseSound:play()
     else
       playerPts.points = playerPts.points + 1
+      self.scoreSound:play()
     end
     self.x=w/2
     self.y=h/2
@@ -56,6 +61,7 @@ end
 function ball:collision(val)
 
   if (self.x < val.x + val.w and self.x + self.w > val.x and self.y < val.y + val.h and self.h + self.y > val.y) then
+    self.colisionSound:play()
     self.vel=self.vel*1.1
     self.ang = -(self.ang - math.pi/2 ) + math.pi/2
     if val.x > w/2 then

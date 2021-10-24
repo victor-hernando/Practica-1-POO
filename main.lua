@@ -15,11 +15,20 @@ local thingsToPrint, thingsStart, thingsCatchName, thingsPlay, thingsHiScore
 local ballSprite, paddleSprite
 local startButton, startButtonPressed, quitButton, quitButtonPressed, nameButton, insertNameButton, gameOver, heart
 local writing = "return {"
+local clickSound, soundtrack, colisionSound, scoreSound, loseSound
 
 function love.load(arg)
   if arg[#arg] == "-debug" then
     require("mobdebug").start()
   end
+  
+  clickSound = love.audio.newSource("sounds/Click.wav", "static")
+  soundtrack = love.audio.newSource("sounds/Soundtrack.mp3", "stream")
+  soundtrack:setVolume(0.6)
+  colisionSound = love.audio.newSource("sounds/BallCollision.mp3", "static")
+  scoreSound = love.audio.newSource("sounds/MakePoint.mp3", "static")
+  scoreSound:setVolume(0.8)
+  loseSound = love.audio.newSource("sounds/LosePoint.mp3", "static")
   
   ballSprite = love.graphics.newImage("sprites/ball.png")
   playerSprite = love.graphics.newImage("sprites/paddle1.png")
@@ -52,10 +61,11 @@ function love.load(arg)
   playerScore = score(initScore,playerScoreX,scoreY)
   cpuScore = score(initScore,cpuScoreX,scoreY)
   playerLife = lifes(60, 30, heart, cpuScore, 0.065, 0.065)
-  pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite)
+  pilota = ball(xBall,yBall,ballSprite:getWidth(),ballSprite:getHeight(),initBallVel, initBallAng,player,cpu,playerScore,cpuScore, ballSprite, colisionSound, scoreSound, loseSound)
   
   cpu.setTarget(pilota)
   
+  soundtrack:play()
   thingsPlay = {player,cpu,playerScore,cpuScore,playerLife,pilota}
   thingsToPrint = thingsStart
 end
@@ -73,6 +83,7 @@ end
 
 function love.mousepressed()
   if start:checkMouse() then
+    clickSound:play()
     thingsToPrint=thingsCatchName
   end
   if  exit:checkMouse() then
